@@ -4,7 +4,7 @@ import { IUser } from '../interface';
 import { isApiError, toErrorWithMessage } from '../utils';
 
 // eslint-disable-next-line import/prefer-default-export
-export const userAuthenticated = (body: {
+export const userAuthenticatedMutation = (body: {
   username: string;
   password: string;
 }): Promise<IUser[]> => {
