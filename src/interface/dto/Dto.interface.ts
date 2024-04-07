@@ -15,3 +15,26 @@ export interface IMultipleDashboard {
   success: boolean;
   data: ISingleDashboard[];
 }
+
+export interface ISingleEvent {
+  id: number;
+  title: string;
+  content: string;
+  mainThumbnailUrl: string;
+  brandName: string;
+  hashtags: string[];
+  startDate: string;
+  endDate: string;
+}
+export interface IMultipleEvent {
+  code: number;
+  message: string;
+  success: boolean;
+  data: {
+    results: ISingleEvent[];
+    page: number;
+    totalPage: number;
+    queryCount: number;
+    resultsLength: number;
+  };
+}
