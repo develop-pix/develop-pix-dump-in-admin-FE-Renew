@@ -2,3 +2,4 @@
 export * from './form';
 export * from './dashboardChart';
 export * from './dashboardTable';
+export * from './sidebarItem';
