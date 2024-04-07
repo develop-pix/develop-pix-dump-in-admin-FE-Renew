@@ -1,30 +1,19 @@
-# React + TypeScript + Vite
+# develop-pix-dump-in-admin-FE-Renew
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+## 아토믹 디자인 패턴
+기존 레포에서는 컴포넌트의 수에 비례하여 가독성과 복잡성이 높아진 문제가 있었습니다. 이를 보완하고자 효율적인 컴포넌트 관리를 위해 아토믹 디자인 패턴을 사용했습니다.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+#### 컴포너트 속에 사용되는 아토믹 디자인 패턴 설명
 
-## Expanding the ESLint configuration
+##### 원자(Atom)
+원자는 버튼, 제목, 입력 또는 이벤트 컬러 팔레트, 애니메이션 및 글꼴과 같은 가능한 가장 작은 구성 요소입니다. 이들은 버튼의 예와 같이 비활성화, 호버, 상이한 크기 등과 같은 많은 상태를 갖는 것 외에도 임의의 컨텍스트, 전역 또는 다른 구성 요소 및 템플릿 내에서 적용될 수 있습니다.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+##### 분자(Molecules)
+분자들은 원자를 구성하는 하나 또는 그 이상의 구성요소를 구성하는 역할을 합니다. 이를 통해 우리는 복잡한 구성요소들을 구성하고 그 구성요소들 중 일부를 재사용하기 시작합니다. 분자는 그 자체로 어떠한 기능이나 작용도 없는 원자를 사용함으로써 고유한 특성을 가질 수 있고 기능성을 만들 수 있습니다.
 
-- Configure the top-level `parserOptions` property like this:
+##### 유기체(Organisms)
+유기체는 더 정교한 인터페이스를 구성하는 원자 또는 함께 작동하는 분자의 조합입니다. 이 수준에서 구성 요소는 최종 모양을 갖추기 시작하지만 여전히 독립적이고 휴대 가능하며 어떤 콘텐츠에서도 재사용할 수 있을 만큼 충분히 재사용할 수 있습니다.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## 코드 스타일: Airbnb Javascript Style
+원문 참고: https://airbnb.io/javascript/react/
