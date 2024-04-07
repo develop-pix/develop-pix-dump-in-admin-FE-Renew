@@ -6,7 +6,7 @@ import { isApiError, toErrorWithMessage } from '../utils';
 // eslint-disable-next-line import/prefer-default-export
 export const getDashboardQuery = (): Promise<IMultipleDashboard> => {
   return axios
-    .post('/api/dashboard')
+    .get('/api/dashboard')
     .then((response) => response.data)
     .catch((error) => {
       if (isApiError(error)) {
