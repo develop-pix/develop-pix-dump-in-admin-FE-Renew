@@ -7,4 +7,13 @@ export default defineConfig({
   optimizeDeps: {
     exclude: ['js-big-decimal'],
   },
+  server: {
+    host: true,
+    proxy: {
+      '/api': {
+        target: 'https://dump-in-admin-server.onrender.com/',
+        changeOrigin: true,
+      },
+    },
+  },
 });
