@@ -2,6 +2,7 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
 import { requiredLogin } from '../../hooks';
 import { userAuthenticatedMutation } from '../../remote';
 
@@ -11,7 +12,13 @@ export interface LoginInput {
 }
 
 export const useLoginPage = () => {
-  const mutation = useMutation({ mutationFn: userAuthenticatedMutation });
+  const navigate = useNavigate();
+  const mutation = useMutation({
+    mutationFn: userAuthenticatedMutation,
+    onSuccess() {
+      navigate('/dashboard');
+    },
+  });
 
   const {
     register,
