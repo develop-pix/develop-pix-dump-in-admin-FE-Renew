@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { useMemo } from 'react';
-import { getDashboardQuery } from '../../remote/dashboard';
+import { getDashboardQuery } from '../../remote';
 
 /* eslint-disable import/prefer-default-export */
 export const useDashboardPage = () => {
