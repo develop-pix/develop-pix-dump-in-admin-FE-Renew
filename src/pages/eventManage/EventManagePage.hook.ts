@@ -4,8 +4,8 @@ import { useEffect, useMemo, useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { useNavigate } from 'react-router-dom';
 import { eventManageState, useUpdateEventManage } from '../../recoil';
-import { getEventMutation } from '../../remote';
-import { ISingleEvent } from '../../interface';
+import { getMultipleEventMutation } from '../../remote';
+import { IMutipleEventResult } from '../../interface';
 import { useDebounce } from '../../hooks';
 
 /* eslint-disable import/prefer-default-export */
@@ -19,7 +19,7 @@ export const useEventManage = () => {
   const eventManage = useRecoilValue(eventManageState);
 
   const mutation = useMutation({
-    mutationFn: getEventMutation,
+    mutationFn: getMultipleEventMutation,
     onSuccess: (fetchedData, variables) => {
       useUpdateEventManage(variables.page, fetchedData, setEventManageState);
     },
@@ -52,9 +52,9 @@ export const useEventManage = () => {
 
   const mergedData = useMemo(
     () =>
-      eventManage.reduce((accumulator: ISingleEvent[], currentValue) => {
+      eventManage.reduce((accumulator: IMutipleEventResult[], currentValue) => {
         return accumulator.concat(currentValue.data);
-      }, [] as ISingleEvent[]),
+      }, [] as IMutipleEventResult[]),
     [eventManage]
   );
   const debounceSearch = useDebounce((term) => {

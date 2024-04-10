@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable import/no-cycle */
 import {
   Box,
@@ -21,7 +20,7 @@ import {
 } from '../../components';
 import { customColors } from '../../styles';
 import { useEventManage } from './EventManagePage.hook';
-import { ISingleEvent } from '../../interface';
+import { IMutipleEventResult } from '../../interface';
 
 export default function EventManagePage() {
   const { state, action } = useEventManage();
@@ -101,7 +100,7 @@ export default function EventManagePage() {
                 <TableHeader headers={state.tableHeaders} />
                 <TableBody>
                   {state.sliceTenPages &&
-                    state.sliceTenPages.map((item: ISingleEvent) => (
+                    state.sliceTenPages.map((item: IMutipleEventResult) => (
                       <TableRow
                         key={item.id}
                         id={item.id}

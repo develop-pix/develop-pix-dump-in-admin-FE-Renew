@@ -1,10 +1,10 @@
 /* eslint-disable import/prefer-default-export */
 import { atom } from 'recoil';
-import { ISingleEvent } from '../../interface';
+import { IMutipleEventResult } from '../../interface';
 
 export type EventsState = {
   page: number;
-  data: ISingleEvent[];
+  data: IMutipleEventResult[];
 };
 
 export const eventManageState = atom<EventsState[]>({
