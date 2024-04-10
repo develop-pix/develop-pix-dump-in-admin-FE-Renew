@@ -4,7 +4,7 @@ import { IMultipleEvent } from '../interface';
 import { isApiError, toErrorWithMessage } from '../utils';
 
 // eslint-disable-next-line import/prefer-default-export
-export const getEventMutation = (query: {
+export const getMultipleEventMutation = (query: {
   page: number;
   perPage: number;
 }): Promise<IMultipleEvent> => {
