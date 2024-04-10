@@ -5,7 +5,7 @@ import { getDashboardQuery } from '../../remote';
 /* eslint-disable import/prefer-default-export */
 export const useDashboardPage = () => {
   const { data: dashboardData } = useQuery({
-    queryKey: ['dashboard'],
+    queryKey: ['/api/dashboard'],
     queryFn: getDashboardQuery,
   });
 
