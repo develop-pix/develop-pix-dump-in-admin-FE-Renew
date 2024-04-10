@@ -16,7 +16,7 @@ export interface IMultipleDashboard {
   data: ISingleDashboard[];
 }
 
-export interface ISingleEvent {
+export interface IMutipleEventResult {
   id: number;
   title: string;
   content: string;
@@ -31,10 +31,30 @@ export interface IMultipleEvent {
   message: string;
   success: boolean;
   data: {
-    results: ISingleEvent[];
+    results: IMutipleEventResult[];
     page: number;
     totalPage: number;
     queryCount: number;
     resultsLength: number;
+  };
+}
+
+export interface ISingleEvent {
+  code: number;
+  message: string;
+  success: boolean;
+  data: {
+    id: number;
+    title: string;
+    content: string;
+    mainThumbnailUrl: string;
+    brandName: string;
+    hashtags: [string];
+    startDate: Date;
+    endDate: Date;
+    viewCount: number;
+    likesCount: number;
+    isPublic: boolean;
+    images: string[];
   };
 }
