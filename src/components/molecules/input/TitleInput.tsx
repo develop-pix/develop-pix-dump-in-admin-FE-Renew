@@ -3,10 +3,9 @@ import { useState } from 'react';
 
 interface IProps {
   input: string;
-  setInput: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export default function TitleInput({ input, setInput }: IProps) {
+export default function TitleInput({ input }: IProps) {
   const [error, setError] = useState(false);
 
   const titleInputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -14,7 +13,6 @@ export default function TitleInput({ input, setInput }: IProps) {
       setError(true);
     } else {
       setError(false);
-      setInput(e.currentTarget.value);
     }
   };
   return (
