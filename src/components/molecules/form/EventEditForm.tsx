@@ -4,8 +4,13 @@ import { customColors } from '../../../styles';
 
 interface IProps extends PropsWithChildren {
   onSubmitHandler: (e: React.FormEvent<HTMLFormElement>) => void;
+  goPrevRoute: () => void;
 }
-export default function EventEditForm({ children, onSubmitHandler }: IProps) {
+export default function EventEditForm({
+  children,
+  goPrevRoute,
+  onSubmitHandler,
+}: IProps) {
   return (
     <Box
       sx={{
@@ -44,6 +49,7 @@ export default function EventEditForm({ children, onSubmitHandler }: IProps) {
               size="small"
               variant="contained"
               color="error"
+              onClick={goPrevRoute}
             >
               취소
             </Button>
