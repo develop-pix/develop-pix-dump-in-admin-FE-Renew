@@ -68,7 +68,8 @@ export default function MultipleFileInput({ image, setImage }: IProps) {
           return (
             <Button
               variant="outlined"
-              key={url}
+              // eslint-disable-next-line react/no-array-index-key
+              key={index}
               sx={[
                 {
                   border: `2px solid ${customColors.white}`,
