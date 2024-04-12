@@ -19,8 +19,8 @@ import {
   TableRow,
 } from '../../components';
 import { customColors } from '../../styles';
-import { useEventManage } from './EventManagePage.hook';
 import { IMutipleEventResult } from '../../interface';
+import useEventManage from './EventManagePage.hook';
 
 export default function EventManagePage() {
   const { state, action } = useEventManage();

@@ -8,8 +8,7 @@ import { getMultipleEventMutation } from '../../remote';
 import { IMutipleEventResult } from '../../interface';
 import { useDebounce } from '../../hooks';
 
-/* eslint-disable import/prefer-default-export */
-export const useEventManage = () => {
+const useEventManage = () => {
   const navigate = useNavigate();
   const [page, setPage] = useState(0);
   const [search, setSearch] = useState('');
@@ -192,3 +191,5 @@ export const useEventManage = () => {
     },
   };
 };
+
+export default useEventManage;

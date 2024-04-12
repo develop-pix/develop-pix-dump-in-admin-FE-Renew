@@ -11,7 +11,7 @@ export interface LoginInput {
   password: string;
 }
 
-export const useLoginPage = () => {
+const useLoginPage = () => {
   const navigate = useNavigate();
   const mutation = useMutation({
     mutationFn: userAuthenticatedMutation,
@@ -49,3 +49,5 @@ export const useLoginPage = () => {
     },
   };
 };
+
+export default useLoginPage;
