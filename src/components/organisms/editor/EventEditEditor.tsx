@@ -14,25 +14,26 @@ import {
 export interface IProps {
   title: string;
   photoboothName: string;
-  image: string[];
+  images: string[];
   hashtag: string[];
   startDate: Date;
   endDate: Date;
   isPublic: boolean;
 
   setPhotoboothName: React.Dispatch<React.SetStateAction<string>>;
-  setImage: React.Dispatch<React.SetStateAction<string[]>>;
+  setImages: React.Dispatch<React.SetStateAction<string[]>>;
   description: EditorState;
   setDescription: React.Dispatch<React.SetStateAction<EditorState>>;
   setHashtag: React.Dispatch<React.SetStateAction<string[]>>;
+  setTitle: React.Dispatch<React.SetStateAction<string>>;
   handlePublicChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 export default function EventEditEditor({
   title,
   photoboothName,
   setPhotoboothName,
-  image,
-  setImage,
+  images,
+  setImages,
   description,
   setDescription,
   hashtag,
@@ -41,6 +42,7 @@ export default function EventEditEditor({
   setHashtag,
   isPublic,
   handlePublicChange,
+  setTitle,
 }: IProps) {
   return (
     <Box
@@ -71,7 +73,7 @@ export default function EventEditEditor({
           >
             제목
           </Typography>
-          <TitleInput input={title} />
+          <TitleInput input={title} setInput={setTitle} />
         </Box>
         <Box sx={{ display: 'flex' }}>
           <Typography
@@ -98,7 +100,7 @@ export default function EventEditEditor({
           >
             이미지
           </Typography>
-          <MultipleFileInput image={image} setImage={setImage} />
+          <MultipleFileInput images={images} setImages={setImages} />
         </Box>
         <Box sx={{ display: 'flex' }}>
           <Typography
