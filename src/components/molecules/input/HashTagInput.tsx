@@ -15,7 +15,7 @@ export default function HashTagInput({ hashtag, setHashtag }: IProps) {
     { id: 1, tag: '콜라보', value: '콜라보' },
     { id: 2, tag: '연예인', value: '연예인' },
     { id: 3, tag: '계절', value: '계절' },
-    { id: 4, tag: '이달의프레임', value: '이달의 프레임' },
+    { id: 4, tag: '이달의 프레임', value: '이달의 프레임' },
   ];
 
   return (
