@@ -34,12 +34,17 @@ const useEventEditPage = () => {
   const mutation = useMutation({
     mutationFn: updateSingleEventMutation,
     onSuccess: () => {
+      // 업데이트를 한 후 다시 Get api call을 한다.
       queryClient.invalidateQueries({ queryKey: [`/api/event/id`, params] });
+
+      // eventManage 전역 상태를 초기화하여 다시 API call이 일어날 수 있도록 한다.
       setEventManage(() => []);
+
       navigate(-1);
     },
   });
 
+  // 처음 Get Api Call이 있을시 이때 가져온 값을 초기 상태로 변환한다.
   useEffect(() => {
     if (eventData) {
       setTitle(eventData?.data.title ?? '');
@@ -80,7 +85,10 @@ const useEventEditPage = () => {
       isPublic: { checked: boolean };
     };
 
+    /** base64 이미지들을 Blob 형식으로 변환 */
     const blobImages = [...images].map((data) => base64ToBlob(data));
+
+    /** Blob화 된 이미지들을 모두 S3에 업로드 한 후 해당 URL값들을 Array형식으로 변환 */
     const urlImages = await Promise.all(blobImages.map(uploadFile));
 
     const body = {
