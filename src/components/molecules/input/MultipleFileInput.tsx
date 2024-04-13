@@ -3,18 +3,18 @@ import { VisuallyHiddenInput } from '../../../styles/reuse/Input.style';
 import { customColors } from '../../../styles/base/Variable.style';
 
 interface IProps {
-  image: string[];
-  setImage: React.Dispatch<React.SetStateAction<string[]>>;
+  images: string[];
+  setImages: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
-export default function MultipleFileInput({ image, setImage }: IProps) {
+export default function MultipleFileInput({ images, setImages }: IProps) {
   const uploadImageHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = e.target;
 
     if (!files) {
       return;
     }
-    if (image.length + files.length > 4) {
+    if (images.length + files.length > 4) {
       alert('최대 4개 사진까지 첨부 할 수 있습니다.');
       return;
     }
@@ -23,7 +23,7 @@ export default function MultipleFileInput({ image, setImage }: IProps) {
       const reader = new FileReader();
 
       reader.onload = () => {
-        setImage((prev) => [...prev, reader.result as string]);
+        setImages((prev) => [...prev, reader.result as string]);
       };
       reader.readAsDataURL(file);
     };
@@ -39,8 +39,8 @@ export default function MultipleFileInput({ image, setImage }: IProps) {
   ) => {
     e.stopPropagation();
     e.preventDefault();
-    const filterImage = image.filter((imageUrl) => imageUrl !== url);
-    setImage(filterImage);
+    const filterImage = images.filter((imageUrl) => imageUrl !== url);
+    setImages(filterImage);
   };
 
   /* 사진 클릭시 대표사진 변경 */
@@ -50,9 +50,9 @@ export default function MultipleFileInput({ image, setImage }: IProps) {
   ) => {
     e.stopPropagation();
     e.preventDefault();
-    const representativeImage = image.filter((imageUrl) => imageUrl === url);
-    const remainImage = image.filter((imageUrl) => imageUrl !== url);
-    setImage(representativeImage.concat(remainImage));
+    const representativeImage = images.filter((imageUrl) => imageUrl === url);
+    const remainImage = images.filter((imageUrl) => imageUrl !== url);
+    setImages(representativeImage.concat(remainImage));
   };
 
   return (
@@ -64,7 +64,7 @@ export default function MultipleFileInput({ image, setImage }: IProps) {
           flexWrap: 'wrap',
         }}
       >
-        {image.map((url, index) => {
+        {images?.map((url, index) => {
           return (
             <Button
               variant="outlined"
