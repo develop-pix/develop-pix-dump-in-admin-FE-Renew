@@ -10,9 +10,10 @@ const theme = createTheme({
     fontFamily: 'Noto Sans KR, Roboto, sans-serif',
   },
 });
-function App() {
-  const queryClient = new QueryClient();
 
+export const queryClient = new QueryClient();
+
+function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <RecoilRoot>
