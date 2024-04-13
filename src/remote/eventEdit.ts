@@ -17,20 +17,12 @@ export const getSingleEventQuery = (id: string): Promise<ISingleEvent> => {
     });
 };
 
-export const updateSingleEventMutation = (body: {
-  title: string;
-  content: string;
-  mainThumbnailUrl: string;
-  brandName: string;
-  isPublic: boolean;
-  startDate: Date;
-  endDate: Date;
-  hashtags: string[];
-  images: string[];
-  id: number;
-}): Promise<null> => {
+export const updateSingleEventMutation = ({
+  body,
+  id,
+}: MutationParams): Promise<null> => {
   return axios
-    .patch(`api/event/${body.id}`, body)
+    .patch(`/api/event/${id}`, body)
     .then((response) => response.data)
     .catch((error) => {
       if (isApiError(error)) {
@@ -42,3 +34,20 @@ export const updateSingleEventMutation = (body: {
       return Promise.reject(error);
     });
 };
+
+interface EventEditData {
+  title: string;
+  content: string;
+  mainThumbnailUrl: string;
+  brandName: string;
+  isPublic: boolean;
+  startDate: string;
+  endDate: string;
+  hashtags: string[];
+  images: string[];
+}
+
+interface MutationParams {
+  body: EventEditData;
+  id: number;
+}
