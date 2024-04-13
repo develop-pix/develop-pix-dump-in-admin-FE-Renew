@@ -1,6 +1,11 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { createBrowserRouter } from 'react-router-dom';
-import { DashboardPage, EventManagePage, LoginPage } from '../pages';
+import {
+  DashboardPage,
+  EventEditPage,
+  EventManagePage,
+  LoginPage,
+} from '../pages';
 
 const router = createBrowserRouter([
   {
@@ -14,6 +19,10 @@ const router = createBrowserRouter([
   {
     path: '/event',
     element: <EventManagePage />,
+  },
+  {
+    path: '/event/edit/:id',
+    element: <EventEditPage />,
   },
 ]);
 
