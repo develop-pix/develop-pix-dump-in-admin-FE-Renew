@@ -14,22 +14,26 @@ import { eventManageState } from '../../recoil';
 
 const useEventEditPage = () => {
   const params = useLocation().pathname.split('/').pop();
+  const navigate = useNavigate();
   const [photoboothName, setPhotoboothName] = useState('');
   const [hashtag, setHashtag] = useState<string[]>([]);
   const [images, setImages] = useState<string[]>(['']);
   const [isPublic, setIsPublic] = useState(false);
+  const [title, setTitle] = useState('');
+  const [, setEventManage] = useRecoilState(eventManageState);
+  const eventId = Number(params);
   const [description, setDescription] = useState<EditorState>(
     EditorState.createEmpty()
   );
-  const [title, setTitle] = useState('');
-  const navigate = useNavigate();
-  const eventId = Number(params);
+
   const { data: eventData } = useQuery({
     queryKey: [`/api/event/id`, params],
     queryFn: () => getSingleEventQuery(params ?? ''),
     enabled: !!params,
   });
-  const [, setEventManage] = useRecoilState(eventManageState);
+
+  const initStartDate = eventData?.data?.startDate ?? new Date();
+  const initEndDate = eventData?.data?.endDate ?? new Date();
 
   const mutation = useMutation({
     mutationFn: updateSingleEventMutation,
@@ -43,29 +47,6 @@ const useEventEditPage = () => {
       navigate(-1);
     },
   });
-
-  // 처음 Get Api Call이 있을시 이때 가져온 값을 초기 상태로 변환한다.
-  useEffect(() => {
-    if (eventData) {
-      setTitle(eventData?.data.title ?? '');
-      setPhotoboothName(eventData?.data.brandName ?? '');
-      setImages(
-        [
-          eventData?.data.mainThumbnailUrl ?? '',
-          ...(eventData?.data.images ?? []),
-        ] ?? []
-      );
-      setIsPublic(eventData?.data.isPublic ?? false);
-      setHashtag(eventData?.data.hashtags ?? []);
-      setDescription(
-        EditorState.createWithContent(
-          stateFromHTML(eventData?.data.content ?? '')
-        )
-      );
-    }
-  }, [eventData]);
-  const initStartDate = eventData?.data?.startDate ?? new Date();
-  const initEndDate = eventData?.data?.endDate ?? new Date();
 
   const handlePublicChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setIsPublic(event.target.checked);
@@ -105,6 +86,27 @@ const useEventEditPage = () => {
 
     mutation.mutate({ body, id: eventId });
   };
+
+  // 처음 Get Api Call이 있을시 이때 가져온 값을 초기 상태로 변환한다.
+  useEffect(() => {
+    if (eventData) {
+      setTitle(eventData?.data.title ?? '');
+      setPhotoboothName(eventData?.data.brandName ?? '');
+      setImages(
+        [
+          eventData?.data.mainThumbnailUrl ?? '',
+          ...(eventData?.data.images ?? []),
+        ] ?? []
+      );
+      setIsPublic(eventData?.data.isPublic ?? false);
+      setHashtag(eventData?.data.hashtags ?? []);
+      setDescription(
+        EditorState.createWithContent(
+          stateFromHTML(eventData?.data.content ?? '')
+        )
+      );
+    }
+  }, [eventData]);
 
   return {
     state: {
