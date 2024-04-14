@@ -1,5 +1,4 @@
-/* eslint-disable import/no-extraneous-dependencies */
-import { Box, FormControlLabel, Switch, Typography } from '@mui/material';
+import { Box, Switch, Typography } from '@mui/material';
 import { EditorState } from 'draft-js';
 import { customColors } from '../../../styles';
 import {
@@ -149,12 +148,22 @@ export default function EventEditEditor({
           </Typography>
           <HashTagInput hashtag={hashtag} setHashtag={setHashtag} />
         </Box>
-
-        <FormControlLabel
-          name="isPublic"
-          control={<Switch checked={isPublic} onChange={handlePublicChange} />}
-          label="공개여부"
-        />
+        <Box sx={{ display: 'flex' }}>
+          <Typography
+            sx={{ width: '130px' }}
+            fontSize={18}
+            fontWeight={600}
+            display="flex"
+            alignItems="center"
+          >
+            공개여부
+          </Typography>
+          <Switch
+            checked={isPublic}
+            onChange={handlePublicChange}
+            name="isPublic"
+          />
+        </Box>
       </Box>
     </Box>
   );
