@@ -29,61 +29,65 @@ export default function EventManagePage() {
     <Box sx={{ display: 'flex' }}>
       <Sidebar />
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-        <FormControlLabel
-          control={
-            <Switch
-              checked={state.checkedSort}
-              onChange={action.handleSortByDate}
-            />
-          }
-          label="최신등록순"
-        />
-        <FormControlLabel
-          control={
-            <Switch
-              checked={state.checkedDeadline}
-              onChange={action.handleSortByDeadline}
-            />
-          }
-          label="마감순"
-        />
         <PaperContainer
           title="이벤트 관리"
           top={
-            <Box sx={{ display: 'flex', gap: '50px' }}>
-              <Paper
-                component="form"
-                sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  width: 300,
-                  margin: '0px 0px 5px 0px',
-                }}
-              >
-                <InputBase
-                  sx={{ ml: 1, flex: 1 }}
-                  placeholder="검색하기"
-                  inputProps={{ 'aria-label': '검색' }}
-                  onChange={action.handleSearchInput}
+            <>
+              <Box sx={{ display: 'flex' }}>
+                <FormControlLabel
+                  control={
+                    <Switch
+                      checked={state.checkedSort}
+                      onChange={action.handleSortByDate}
+                    />
+                  }
+                  label="최신등록순"
                 />
-                <IconButton
-                  type="button"
-                  sx={{ p: '10px' }}
-                  aria-label="search"
+                <FormControlLabel
+                  control={
+                    <Switch
+                      checked={state.checkedDeadline}
+                      onChange={action.handleSortByDeadline}
+                    />
+                  }
+                  label="마감순"
+                />
+              </Box>
+              <Box sx={{ display: 'flex', gap: '50px' }}>
+                <Paper
+                  component="form"
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    width: 300,
+                    margin: '0px 0px 5px 0px',
+                  }}
                 >
-                  <SearchIcon />
-                </IconButton>
-              </Paper>
-              <Button
-                sx={{ margin: '0px 10px 5px 0px' }}
-                color="primary"
-                variant="contained"
-                type="button"
-                onClick={action.addNewEvent}
-              >
-                추가
-              </Button>
-            </Box>
+                  <InputBase
+                    sx={{ ml: 1, flex: 1 }}
+                    placeholder="검색하기"
+                    inputProps={{ 'aria-label': '검색' }}
+                    onChange={action.handleSearchInput}
+                  />
+                  <IconButton
+                    type="button"
+                    sx={{ p: '10px' }}
+                    aria-label="search"
+                  >
+                    <SearchIcon />
+                  </IconButton>
+                </Paper>
+                <Button
+                  sx={{ margin: '0px 10px 5px 0px' }}
+                  color="primary"
+                  variant="contained"
+                  type="button"
+                  onClick={action.addNewEvent}
+                >
+                  추가
+                </Button>
+              </Box>
+            </>
           }
           down={
             <Box
