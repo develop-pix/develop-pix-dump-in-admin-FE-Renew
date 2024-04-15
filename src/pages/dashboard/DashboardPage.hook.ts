@@ -2,10 +2,9 @@ import { useQuery } from '@tanstack/react-query';
 import { useMemo } from 'react';
 import { getDashboardQuery } from '../../remote';
 
-/* eslint-disable import/prefer-default-export */
-export const useDashboardPage = () => {
+const useDashboardPage = () => {
   const { data: dashboardData } = useQuery({
-    queryKey: ['dashboard'],
+    queryKey: ['/api/dashboard'],
     queryFn: getDashboardQuery,
   });
 
@@ -82,3 +81,5 @@ export const useDashboardPage = () => {
     },
   };
 };
+
+export default useDashboardPage;

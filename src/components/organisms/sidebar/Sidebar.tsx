@@ -20,7 +20,7 @@ export default function Sidebar() {
       <List sx={{ marginTop: '100px' }}>
         <SidebarItem url="/dashboard" title="대시보드" />
         <SidebarItem url="/event" title="이벤트관리" />
-        <SidebarItem url="/branch" title="보토부스 관리" />
+        <SidebarItem url="/branch" title="포토부스 관리" />
         <SidebarItem url="/review" title="리뷰 관리" />
         <SidebarItem url="/user" title="사용자 관리" />
       </List>

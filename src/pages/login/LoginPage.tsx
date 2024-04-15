@@ -1,6 +1,6 @@
 // eslint-disable-next-line import/no-cycle
 import { LoginForm } from '../../components';
-import { useLoginPage } from './LoginPage.hook';
+import useLoginPage from './LoginPage.hook';
 
 export default function LoginPage() {
   const { state, action } = useLoginPage();

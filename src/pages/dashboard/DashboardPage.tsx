@@ -1,7 +1,7 @@
 /* eslint-disable import/no-cycle */
 import { Box } from '@mui/material';
-import { useDashboardPage } from './DashboardPage.hook';
 import { DashboardChart, DashboardTable, Sidebar } from '../../components';
+import useDashboardPage from './DashboardPage.hook';
 
 export default function DashboardPage() {
   const { state } = useDashboardPage();

@@ -39,7 +39,7 @@ export default function TableRow({
       <TableCell sx={{ fontSize: '16px', minWidth: 130 }}>{hashtag}</TableCell>
       <TableCell sx={{ fontSize: '16px', minWidth: 100 }}>
         <Box sx={{ display: 'flex', gap: '10px' }}>
-          <Link to={`/edit/${id}`}>
+          <Link to={`./edit/${id}`}>
             <Button size="small" variant="contained" color="success">
               편집
             </Button>
