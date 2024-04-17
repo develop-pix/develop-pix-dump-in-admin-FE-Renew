@@ -10,8 +10,7 @@ export const getDashboardQuery = (): Promise<IMultipleDashboard> => {
     .then((response) => response.data)
     .catch((error) => {
       if (isApiError(error)) {
-        const { data } = error.error;
-        reportError(data.message);
+        reportError(error.message);
       } else {
         reportError(toErrorWithMessage(error).message);
       }
