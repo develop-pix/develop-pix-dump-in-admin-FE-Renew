@@ -19,6 +19,6 @@ export const userAuthenticatedMutation = (body: {
       } else {
         reportError(toErrorWithMessage(error).message);
       }
-      return Promise.reject(error);
+      return Promise.reject(error.response);
     });
 };

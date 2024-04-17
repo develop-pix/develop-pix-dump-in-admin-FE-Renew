@@ -14,6 +14,6 @@ export const getDashboardQuery = (): Promise<IMultipleDashboard> => {
       } else {
         reportError(toErrorWithMessage(error).message);
       }
-      return Promise.reject(error);
+      return Promise.reject(error.response);
     });
 };

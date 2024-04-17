@@ -12,7 +12,7 @@ export const getSingleEventQuery = (id: string): Promise<ISingleEvent> => {
       } else {
         reportError(toErrorWithMessage(error).message);
       }
-      return Promise.reject(error);
+      return Promise.reject(error.response);
     });
 };
 
@@ -29,7 +29,7 @@ export const updateSingleEventMutation = ({
       } else {
         reportError(toErrorWithMessage(error).message);
       }
-      return Promise.reject(error);
+      return Promise.reject(error.response);
     });
 };
 

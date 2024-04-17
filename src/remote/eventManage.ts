@@ -17,6 +17,6 @@ export const getMultipleEventMutation = (query: {
       } else {
         reportError(toErrorWithMessage(error).message);
       }
-      return Promise.reject(error);
+      return Promise.reject(error.response);
     });
 };
