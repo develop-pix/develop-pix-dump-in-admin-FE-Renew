@@ -1,4 +1,4 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
+/* eslint-disable import/no-cycle */
 import { createBrowserRouter } from 'react-router-dom';
 import {
   DashboardPage,
