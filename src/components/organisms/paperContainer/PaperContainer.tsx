@@ -22,7 +22,6 @@ export default function PaperContainer({ top, down, title }: IProps) {
           sx={{
             display: 'flex',
             width: '100%',
-            justifyContent: 'space-between',
           }}
         >
           <Box
