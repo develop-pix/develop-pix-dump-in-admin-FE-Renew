@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import axios from 'axios';
 import { IMultipleEvent } from '../interface';
 import { isApiError, toErrorWithMessage } from '../utils';
@@ -9,7 +8,7 @@ export const getMultipleEventMutation = (query: {
   perPage: number;
 }): Promise<IMultipleEvent> => {
   return axios
-    .get(`api/event?page=${query.page}&perPage=${query.perPage}`)
+    .get(`/api/event?page=${query.page}&perPage=${query.perPage}`)
     .then((response) => response.data)
     .catch((error) => {
       if (isApiError(error)) {
