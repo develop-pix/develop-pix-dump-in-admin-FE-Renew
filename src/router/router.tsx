@@ -26,7 +26,7 @@ const router = createBrowserRouter([
     element: <EventEditPage />,
   },
   {
-    path: '/users',
+    path: '/user',
     element: <UserManagePage />,
   },
 ]);
