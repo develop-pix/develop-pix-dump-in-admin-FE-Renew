@@ -10,16 +10,16 @@ import {
 } from '../../interface';
 import {
   useDataAfterSearch,
-  useDebounce,
+  useDebounceSearch,
   useMutateDataBasedOnPageValue,
   useSlicePage,
 } from '../../hooks';
 
 const useUserManage = () => {
   const [page, setPage] = useState(0);
-  const [search, setSearch] = useState('');
   const setUserManageState = useSetRecoilState(userManageState);
   const userManage = useRecoilValue(userManageState);
+  const { search, handleSearchInput } = useDebounceSearch();
   const tableHeaders = [
     '닉네임',
     '제목',
@@ -34,15 +34,6 @@ const useUserManage = () => {
       useUpdateUserManage(variables.page, fetchedData, setUserManageState);
     },
   });
-
-  const debounceSearch = useDebounce((term) => {
-    setSearch(term);
-  }, 500);
-
-  const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const input = e.currentTarget.value as string;
-    debounceSearch(input);
-  };
 
   const mergedData = useMemo(
     () =>

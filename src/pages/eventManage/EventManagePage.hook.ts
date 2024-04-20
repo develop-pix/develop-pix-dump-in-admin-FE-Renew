@@ -8,7 +8,7 @@ import { getMultipleEventMutation } from '../../remote';
 import { IMultipleEvent, IMutipleEventResult } from '../../interface';
 import {
   useDataAfterSearch,
-  useDebounce,
+  useDebounceSearch,
   useMutateDataBasedOnPageValue,
   useSlicePage,
 } from '../../hooks';
@@ -16,11 +16,11 @@ import {
 const useEventManage = () => {
   const navigate = useNavigate();
   const [page, setPage] = useState(0);
-  const [search, setSearch] = useState('');
   const [checkedSort, setCheckedSort] = useState(false);
   const [checkedDeadline, setCheckedDeadline] = useState(false);
   const setEventManageState = useSetRecoilState(eventManageState);
   const eventManage = useRecoilValue(eventManageState);
+  const { search, handleSearchInput } = useDebounceSearch();
 
   const mutation = useMutation({
     mutationFn: getMultipleEventMutation,
@@ -54,15 +54,6 @@ const useEventManage = () => {
   ) => {
     event?.preventDefault();
     setPage(newPage);
-  };
-
-  const debounceSearch = useDebounce((term) => {
-    setSearch(term);
-  }, 500);
-
-  const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const input = e.currentTarget.value as string;
-    debounceSearch(input);
   };
 
   const addNewEvent = () => {

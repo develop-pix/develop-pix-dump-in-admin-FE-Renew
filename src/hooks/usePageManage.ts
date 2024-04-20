@@ -1,5 +1,6 @@
 import { UseMutateFunction } from '@tanstack/react-query';
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import { useDebounce } from '.';
 
 /**
  *
@@ -9,7 +10,8 @@ import { useEffect, useMemo } from 'react';
  *
  * 1. pagination 값에 따라 새 페이지에 상응하는 데이터를 불러옵니다
  * 2. 합친 데이터들을 10개씩 자릅니다
- * 3. search input과 input condition의 의존성을 주입받아 필터링 된 데이터를 리턴합니다.
+ * 3. search input과 input condition의 의존성을 주입받아 필터링 된 데이터를 리턴합니다
+ * 4. Debounce된 search 값과 setSearch handler를 리턴합니다.
  *
  * */
 
@@ -78,4 +80,22 @@ export const useDataAfterSearch = <T>(
 
     return dataSearchCondition(testQuery, data);
   });
+};
+
+export const useDebounceSearch = () => {
+  const [search, setSearch] = useState('');
+
+  const debounceSearch = useDebounce((term) => {
+    setSearch(term);
+  }, 500);
+
+  const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const input = e.currentTarget.value as string;
+    debounceSearch(input);
+  };
+
+  return {
+    search,
+    handleSearchInput,
+  };
 };
