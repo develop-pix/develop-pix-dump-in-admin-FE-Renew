@@ -58,3 +58,25 @@ export interface ISingleEvent {
     images: string[];
   };
 }
+export interface IMultipleUserManageResult {
+  id: number;
+  username: string;
+  email: string;
+  nickname: string;
+  deletedAt: string;
+  createdAt: string;
+  review: number;
+}
+
+export interface IMultipleUserManage {
+  code: number;
+  message: string;
+  success: boolean;
+  data: {
+    results: IMultipleUserManageResult[];
+    page: number;
+    totalPage: number;
+    queryCount: number;
+    resultsLength: number;
+  };
+}
