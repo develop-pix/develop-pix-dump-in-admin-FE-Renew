@@ -1,11 +1,19 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { useMutation } from '@tanstack/react-query';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { getMultipleUserMutation } from '../../remote';
 import { useUpdateUserManage, userManageState } from '../../recoil';
-import { IMultipleUserManageResult } from '../../interface';
-import { useDebounce } from '../../hooks';
+import {
+  IMultipleUserManage,
+  IMultipleUserManageResult,
+} from '../../interface';
+import {
+  useDataAfterSearch,
+  useDebounce,
+  useMutateDataBasedOnPageValue,
+  useSlicePage,
+} from '../../hooks';
 
 const useUserManage = () => {
   const [page, setPage] = useState(0);
@@ -27,11 +35,14 @@ const useUserManage = () => {
     },
   });
 
-  /** 달라진 page 값이 Redux page 프로퍼티 값과 일치하는지 확인 */
-  const hasPageValue = useMemo(
-    () => userManage.findIndex((x) => x.page === page),
-    [userManage, page]
-  );
+  const debounceSearch = useDebounce((term) => {
+    setSearch(term);
+  }, 500);
+
+  const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const input = e.currentTarget.value as string;
+    debounceSearch(input);
+  };
 
   const mergedData = useMemo(
     () =>
@@ -44,52 +55,44 @@ const useUserManage = () => {
     [userManage]
   );
 
-  /** Search 타이핑 후 바뀐 데이터 */
-  const dataAfterSearch = useMemo(() => {
-    return [...mergedData].filter((data) => {
-      const query = new RegExp(search, 'i');
-      const testQuery = (words: string) => query.test(words);
+  const dataSearchCondition = (
+    testQuery: (words: string) => boolean,
+    data: IMultipleUserManageResult
+  ) => {
+    // 유저 이름 먼저 찾는다
+    if (testQuery(data.username)) {
+      return true;
+    }
+    if (testQuery(data.email)) {
+      return true;
+    }
+    if (testQuery(data.nickname)) {
+      return true;
+    }
+    if (testQuery(data.deletedAt)) {
+      return true;
+    }
+    if (testQuery(data.createdAt)) {
+      return true;
+    }
+    if (testQuery(`${data.review}`)) {
+      return true;
+    }
 
-      // 메인썸내일 먼저 찾는다
-      if (testQuery(data.username)) {
-        return true;
-      }
-      if (testQuery(data.email)) {
-        return true;
-      }
-      if (testQuery(data.nickname)) {
-        return true;
-      }
-      if (testQuery(data.deletedAt)) {
-        return true;
-      }
-      if (testQuery(data.createdAt)) {
-        return true;
-      }
-      if (testQuery(`${data.review}`)) {
-        return true;
-      }
-
-      return false;
-    });
-  }, [mergedData, search]);
-
-  const debounceSearch = useDebounce((term) => {
-    setSearch(term);
-  }, 500);
-
-  const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const input = e.currentTarget.value as string;
-    debounceSearch(input);
+    return false;
   };
-
-  /** 자를 페이지 단위 */
-  const pageUnit = 10;
+  /** Search 타이핑 후 바뀐 데이터 */
+  const dataAfterSearch = useDataAfterSearch<IMultipleUserManageResult>(
+    mergedData,
+    search,
+    dataSearchCondition
+  );
 
   /** 10개 단위로 자른 데이터  */
-  const sliceTenPages =
-    dataAfterSearch &&
-    [...dataAfterSearch]?.slice(page * pageUnit, page * pageUnit + pageUnit);
+  const sliceTenPages = useSlicePage<IMultipleUserManageResult>(
+    dataAfterSearch,
+    page
+  );
 
   /** 페이지 변경 핸들러 */
   const handlePageChange = (
@@ -100,20 +103,10 @@ const useUserManage = () => {
     setPage(newPage);
   };
 
-  // 만약 달라진 page 값이 Redux 안에 없을시 API를 Call함
-  useEffect(() => {
-    let ignore = false;
-    if (!ignore && hasPageValue === -1)
-      mutation.mutate({
-        page: page + 1,
-        perPage: 10,
-      });
-
-    return () => {
-      ignore = true;
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [hasPageValue, page]);
+  useMutateDataBasedOnPageValue<
+    IMultipleUserManage,
+    IMultipleUserManageResult[]
+  >(mutation.mutate, page, userManage);
 
   return {
     state: { page, tableHeaders, sliceTenPages, mergedData },

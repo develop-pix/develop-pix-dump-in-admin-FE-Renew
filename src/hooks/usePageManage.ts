@@ -3,7 +3,13 @@ import { useEffect, useMemo } from 'react';
 
 /**
  *
- *  usePageManage hook은 EventManagePage, UserManagepage와 같은 관리 페이지에 자주 사용되는 로직을 묶은 파일입니다
+ * usePageManage hook은 EventManagePage, UserManagePage와 같은 관리 페이지에 자주 사용되는 로직을 묶은 파일입니다,
+ *
+ * 자주 사용되는 로직은 이렇습니다:
+ *
+ * 1. pagination 값에 따라 새 페이지에 상응하는 데이터를 불러옵니다
+ * 2. 합친 데이터들을 10개씩 자릅니다
+ * 3. search input과 input condition의 의존성을 주입받아 필터링 된 데이터를 리턴합니다.
  *
  * */
 

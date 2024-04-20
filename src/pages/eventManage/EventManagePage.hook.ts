@@ -5,8 +5,13 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { useNavigate } from 'react-router-dom';
 import { eventManageState, useUpdateEventManage } from '../../recoil';
 import { getMultipleEventMutation } from '../../remote';
-import { IMutipleEventResult } from '../../interface';
-import { useDebounce } from '../../hooks';
+import { IMultipleEvent, IMutipleEventResult } from '../../interface';
+import {
+  useDataAfterSearch,
+  useDebounce,
+  useMutateDataBasedOnPageValue,
+  useSlicePage,
+} from '../../hooks';
 
 const useEventManage = () => {
   const navigate = useNavigate();
@@ -23,6 +28,14 @@ const useEventManage = () => {
       useUpdateEventManage(variables.page, fetchedData, setEventManageState);
     },
   });
+
+  const mergedData = useMemo(
+    () =>
+      eventManage.reduce((accumulator: IMutipleEventResult[], currentValue) => {
+        return accumulator.concat(currentValue.data);
+      }, [] as IMutipleEventResult[]),
+    [eventManage]
+  );
 
   /** 기간 올림차순, 내림차순 핸들러 */
   const handleSortByDate = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,19 +56,6 @@ const useEventManage = () => {
     setPage(newPage);
   };
 
-  /** 달라진 page 값이 Redux page 프로퍼티 값과 일치하는지 확인 */
-  const hasPageValue = useMemo(
-    () => eventManage.findIndex((x) => x.page === page),
-    [eventManage, page]
-  );
-
-  const mergedData = useMemo(
-    () =>
-      eventManage.reduce((accumulator: IMutipleEventResult[], currentValue) => {
-        return accumulator.concat(currentValue.data);
-      }, [] as IMutipleEventResult[]),
-    [eventManage]
-  );
   const debounceSearch = useDebounce((term) => {
     setSearch(term);
   }, 500);
@@ -69,46 +69,45 @@ const useEventManage = () => {
     navigate('./new');
   };
 
+  const dataSearchCondition = (
+    testQuery: (words: string) => boolean,
+    data: IMutipleEventResult
+  ) => {
+    // 메인썸내일 먼저 찾는다
+    if (testQuery(data.mainThumbnailUrl)) {
+      return true;
+    }
+    if (testQuery(data.brandName)) {
+      return true;
+    }
+    if (testQuery(data.content)) {
+      return true;
+    }
+    if (testQuery(data.startDate)) {
+      return true;
+    }
+    if (testQuery(data.endDate)) {
+      return true;
+    }
+    if (testQuery(data.title)) {
+      return true;
+    }
+    if (testQuery(data.hashtags.join(', '))) {
+      return true;
+    }
+
+    return false;
+  };
+
   /** Search 타이핑 후 바뀐 데이터 */
-  const dataAfterSearch = useMemo(() => {
-    return [...mergedData].filter((data) => {
-      const query = new RegExp(search, 'i');
-      const testQuery = (words: string) => query.test(words);
-
-      // 메인썸내일 먼저 찾는다
-      if (testQuery(data.mainThumbnailUrl)) {
-        return true;
-      }
-      if (testQuery(data.brandName)) {
-        return true;
-      }
-      if (testQuery(data.content)) {
-        return true;
-      }
-      if (testQuery(data.startDate)) {
-        return true;
-      }
-      if (testQuery(data.endDate)) {
-        return true;
-      }
-      if (testQuery(data.title)) {
-        return true;
-      }
-      if (testQuery(data.hashtags.join(', '))) {
-        return true;
-      }
-
-      return false;
-    });
-  }, [mergedData, search]);
-
-  /** 자를 페이지 단위 */
-  const pageUnit = 10;
+  const dataAfterSearch = useDataAfterSearch<IMutipleEventResult>(
+    mergedData,
+    search,
+    dataSearchCondition
+  );
 
   /** 10개 단위로 자른 데이터  */
-  const sliceTenPages =
-    dataAfterSearch &&
-    [...dataAfterSearch]?.slice(page * pageUnit, page * pageUnit + pageUnit);
+  const sliceTenPages = useSlicePage(dataAfterSearch, page);
 
   const tableHeaders = [
     '대표사진',
@@ -120,20 +119,11 @@ const useEventManage = () => {
     '편집',
   ];
 
-  // 만약 달라진 page 값이 Redux 안에 없을시 API를 Call함
-  useEffect(() => {
-    let ignore = false;
-    if (!ignore && hasPageValue === -1)
-      mutation.mutate({
-        page: page + 1,
-        perPage: 10,
-      });
-
-    return () => {
-      ignore = true;
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [hasPageValue, page]);
+  useMutateDataBasedOnPageValue<IMultipleEvent, IMutipleEventResult[]>(
+    mutation.mutate,
+    page,
+    eventManage
+  );
 
   // 체크 여부에 따라 기간 등록순(내림차순, 오름차순)으로 정렬
   useEffect(() => {
