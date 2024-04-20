@@ -5,7 +5,7 @@ import {
   EventEditPage,
   EventManagePage,
   LoginPage,
-  UsersPage,
+  UserManagePage,
 } from '../pages';
 
 const router = createBrowserRouter([
@@ -27,7 +27,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/users',
-    element: <UsersPage />,
+    element: <UserManagePage />,
   },
 ]);
 
