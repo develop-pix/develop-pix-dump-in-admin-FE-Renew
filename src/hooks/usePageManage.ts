@@ -61,11 +61,11 @@ export const useSlicePage = <T>(
   page: number,
   pageUnit = 10
 ) => {
-  /** 10개 단위로 자른 데이터  */
-  const sliceTenPages =
+  /** Page unit을 기준으로 자른 데이터  */
+  const slicePagesBasedOnUnit =
     data && [...data]?.slice(page * pageUnit, page * pageUnit + pageUnit);
 
-  return sliceTenPages;
+  return slicePagesBasedOnUnit;
 };
 
 export const useDataAfterSearch = <T>(
