@@ -56,9 +56,11 @@ export const useMutateDataBasedOnPageValue = <T, U>(
   }, [hasPageValue, page]);
 };
 
-export const useSlicePage = <T>(data: Array<T>, page: number) => {
-  const pageUnit = 10;
-
+export const useSlicePage = <T>(
+  data: Array<T>,
+  page: number,
+  pageUnit = 10
+) => {
   /** 10개 단위로 자른 데이터  */
   const sliceTenPages =
     data && [...data]?.slice(page * pageUnit, page * pageUnit + pageUnit);
