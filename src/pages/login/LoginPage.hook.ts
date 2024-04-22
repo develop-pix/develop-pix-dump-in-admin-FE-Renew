@@ -42,7 +42,7 @@ const useLoginPage = () => {
       onSubmitHandler,
       register,
       inputErrors,
-      loginError: mutation.error,
+      loginError: mutation?.error,
     },
     action: {
       handleSubmit,

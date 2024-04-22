@@ -1,15 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 type ApiResponse = {
-  data: {
-    message: string;
-    code: number;
-    success: boolean;
-    data: string;
-  };
-};
-
-type ApiError = {
-  error: ApiResponse;
+  message: string;
+  code: number;
+  success: boolean;
+  data: string;
 };
 
 type ErrorWithMessage = {
@@ -22,8 +16,15 @@ type ErrorWithMessage = {
  * @param error - 체크할 error object
  * @returns error가 ApiError인지 여부를 나타내는 boolean
  */
-export function isApiError(error: any): error is ApiError {
-  return error && typeof error === 'object' && 'error' in error;
+export function isApiError(error: any): error is ApiResponse {
+  return (
+    error &&
+    typeof error === 'object' &&
+    'message' in error &&
+    'code' in error &&
+    'success' in error &&
+    'data' in error
+  );
 }
 
 /**
