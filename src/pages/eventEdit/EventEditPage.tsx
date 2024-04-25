@@ -1,18 +1,15 @@
-/* eslint-disable import/no-cycle */
-import { Box } from '@mui/material';
-import { EventEditEditor, EventEditForm, Sidebar } from '../../components';
+import { EventEdit, SidebarLayout } from '../../components';
 import useEventEditPage from './EventEditPage.hook';
 
 export default function EventEditPage() {
   const { state, action } = useEventEditPage();
   return (
-    <Box sx={{ display: 'flex' }}>
-      <Sidebar />
-      <EventEditForm
+    <SidebarLayout>
+      <EventEdit.Form
         onSubmitHandler={action.onSubmitHandler}
         goPrevRoute={action.goPrevRoute}
       >
-        <EventEditEditor
+        <EventEdit.Editor
           title={state.title}
           photoboothName={state.photoboothName}
           images={state.images}
@@ -28,7 +25,7 @@ export default function EventEditPage() {
           handlePublicChange={action.handlePublicChange}
           setTitle={action.setTitle}
         />
-      </EventEditForm>
-    </Box>
+      </EventEdit.Form>
+    </SidebarLayout>
   );
 }
