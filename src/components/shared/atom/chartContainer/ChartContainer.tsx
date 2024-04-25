@@ -1,6 +1,6 @@
 import { Box, Paper, Typography } from '@mui/material';
 import { PropsWithChildren } from 'react';
-import { customColors } from '../../../styles';
+import { customColors } from '../../../../styles';
 
 interface IProps extends PropsWithChildren {
   title: string;

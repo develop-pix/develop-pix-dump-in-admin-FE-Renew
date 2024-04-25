@@ -9,7 +9,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from 'recharts';
-import { ChartContainer } from '../atom';
+import { ChartContainer } from '../shared/atom';
 import { IMultipleDashboard } from '../../interface';
 import { customColors } from '../../styles';
 

@@ -8,7 +8,7 @@ import {
   MultipleFileInput,
   SelectPhotoboothInput,
   TitleInput,
-} from '../molecules/input';
+} from '../shared';
 
 export interface IProps {
   title: string;

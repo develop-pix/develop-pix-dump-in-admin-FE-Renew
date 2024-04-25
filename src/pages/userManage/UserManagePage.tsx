@@ -13,7 +13,7 @@ import { PaperContainer, SidebarLayout, TableHeader } from '../../components';
 import { customColors } from '../../styles';
 import useUserManage from './UserManagePage.hook';
 import { IMultipleUserManageResult } from '../../interface';
-import TableRowV2 from '../../components/molecules/table/TableRowV2';
+import TableRowV2 from '../../components/shared/molecules/table/TableRowV2';
 
 export default function UserManagePage() {
   const { state, action } = useUserManage();

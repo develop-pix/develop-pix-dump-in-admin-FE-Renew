@@ -3,7 +3,7 @@ import { Box } from '@mui/material';
 import { EditorState } from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import { customColors } from '../../../styles/base/Variable.style';
+import { customColors } from '../../../../styles';
 
 interface IProps {
   input: EditorState;
