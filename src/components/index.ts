@@ -4,3 +4,4 @@ export * from './organisms';
 export * from './layout';
 export * from './dashboard';
 export * from './eventEdit';
+export * from './login';
