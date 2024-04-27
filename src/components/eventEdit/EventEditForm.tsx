@@ -1,6 +1,6 @@
 import { Box, Button } from '@mui/material';
 import { PropsWithChildren } from 'react';
-import { customColors } from '../../../styles';
+import { customColors } from '../../styles';
 
 interface IProps extends PropsWithChildren {
   onSubmitHandler: (e: React.FormEvent<HTMLFormElement>) => void;

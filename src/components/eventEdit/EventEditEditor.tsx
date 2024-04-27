@@ -1,6 +1,6 @@
 import { Box, Switch, Typography } from '@mui/material';
 import { EditorState } from 'draft-js';
-import { customColors } from '../../../styles';
+import { customColors } from '../../styles';
 import {
   DatePickerInput,
   EditorInput,
@@ -8,7 +8,7 @@ import {
   MultipleFileInput,
   SelectPhotoboothInput,
   TitleInput,
-} from '../../molecules/input';
+} from '../shared';
 
 export interface IProps {
   title: string;

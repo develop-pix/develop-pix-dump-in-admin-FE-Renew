@@ -1,6 +1,6 @@
 import { Box } from '@mui/material';
 import { ReactNode } from 'react';
-import { customColors } from '../../../styles';
+import { customColors } from '../../../../styles';
 
 interface IProps {
   top: ReactNode;

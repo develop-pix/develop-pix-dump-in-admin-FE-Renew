@@ -6,8 +6,8 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material';
-import { ChartContainer } from '../../atom';
-import { IMultipleDashboard } from '../../../interface';
+import { ChartContainer } from '../shared/atom';
+import { IMultipleDashboard } from '../../interface';
 
 interface IProps {
   data: IMultipleDashboard['data'];

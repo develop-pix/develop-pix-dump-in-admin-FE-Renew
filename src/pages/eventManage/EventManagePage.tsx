@@ -14,7 +14,7 @@ import {
 import SearchIcon from '@mui/icons-material/Search';
 import {
   PaperContainer,
-  Sidebar,
+  SidebarLayout,
   TableHeader,
   TableRow,
 } from '../../components';
@@ -26,8 +26,7 @@ export default function EventManagePage() {
   const { state, action } = useEventManage();
 
   return (
-    <Box sx={{ display: 'flex' }}>
-      <Sidebar />
+    <SidebarLayout>
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
         <PaperContainer
           title="이벤트 관리"
@@ -130,6 +129,6 @@ export default function EventManagePage() {
           }
         />
       </Box>
-    </Box>
+    </SidebarLayout>
   );
 }

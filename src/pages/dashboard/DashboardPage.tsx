@@ -1,22 +1,17 @@
-/* eslint-disable import/no-cycle */
-import { Box } from '@mui/material';
-import { DashboardChart, DashboardTable, Sidebar } from '../../components';
+import { Dashboard, SidebarLayout } from '../../components';
 import useDashboardPage from './DashboardPage.hook';
 
 export default function DashboardPage() {
   const { state } = useDashboardPage();
 
   return (
-    <Box sx={{ display: 'flex' }}>
-      <Sidebar />
-      <Box sx={{ display: 'flex' }}>
-        <DashboardChart data={state.data} />
-        <DashboardTable
-          data={state.data}
-          thisWeekData={state.thisWeekData}
-          thisMonthData={state.thisMonthData}
-        />
-      </Box>
-    </Box>
+    <SidebarLayout>
+      <Dashboard.Chart data={state.data} />
+      <Dashboard.Table
+        data={state.data}
+        thisWeekData={state.thisWeekData}
+        thisMonthData={state.thisMonthData}
+      />
+    </SidebarLayout>
   );
 }

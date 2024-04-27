@@ -9,9 +9,9 @@ import {
   Legend,
   ResponsiveContainer,
 } from 'recharts';
-import { ChartContainer } from '../../atom';
-import { customColors } from '../../../styles';
-import { IMultipleDashboard } from '../../../interface';
+import { ChartContainer } from '../shared/atom';
+import { IMultipleDashboard } from '../../interface';
+import { customColors } from '../../styles';
 
 interface IProps {
   data: IMultipleDashboard['data'];

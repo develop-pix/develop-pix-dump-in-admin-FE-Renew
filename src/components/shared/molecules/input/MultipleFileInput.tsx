@@ -1,6 +1,5 @@
 import { Box, Button } from '@mui/material';
-import { VisuallyHiddenInput } from '../../../styles/reuse/Input.style';
-import { customColors } from '../../../styles/base/Variable.style';
+import { VisuallyHiddenInput, customColors } from '../../../../styles';
 
 interface IProps {
   images: string[];

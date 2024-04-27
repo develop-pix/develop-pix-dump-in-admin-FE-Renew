@@ -2,8 +2,8 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { Box, Button, TextField } from '@mui/material';
 import { UseFormReturn } from 'react-hook-form';
-import { customColors } from '../../../styles';
-import { LoginInput } from '../../../pages';
+import { customColors } from '../../styles';
+import { LoginInput } from '../../pages';
 
 interface IProps {
   onSubmitHandler: (data: LoginInput) => void;

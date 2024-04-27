@@ -9,18 +9,17 @@ import {
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import dayjs from 'dayjs';
-import { PaperContainer, Sidebar, TableHeader } from '../../components';
+import { PaperContainer, SidebarLayout, TableHeader } from '../../components';
 import { customColors } from '../../styles';
 import useUserManage from './UserManagePage.hook';
 import { IMultipleUserManageResult } from '../../interface';
-import TableRowV2 from '../../components/molecules/table/TableRowV2';
+import TableRowV2 from '../../components/shared/molecules/table/TableRowV2';
 
 export default function UserManagePage() {
   const { state, action } = useUserManage();
 
   return (
-    <Box sx={{ display: 'flex' }}>
-      <Sidebar />
+    <SidebarLayout>
       <PaperContainer
         title="사용자 관리"
         top={
@@ -128,6 +127,6 @@ export default function UserManagePage() {
           </>
         }
       />
-    </Box>
+    </SidebarLayout>
   );
 }

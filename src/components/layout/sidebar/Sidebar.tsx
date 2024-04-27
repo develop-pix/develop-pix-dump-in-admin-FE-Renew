@@ -1,7 +1,7 @@
 /* eslint-disable import/no-cycle */
 import { Drawer, List } from '@mui/material';
 import { customColors } from '../../../styles';
-import { SidebarItem } from '../..';
+import SidebarItem from './SidebarItem';
 
 export default function Sidebar() {
   return (
