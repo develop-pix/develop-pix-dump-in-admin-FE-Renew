@@ -1,15 +1,23 @@
-import { Box } from '@mui/material';
+/* eslint-disable react/jsx-props-no-spreading */
+import { Box, BoxProps } from '@mui/material';
 import { ReactNode } from 'react';
 import { customColors } from '../../../../styles';
 
-interface IProps {
-  top: ReactNode;
-  down: ReactNode;
+interface IProps extends BoxProps {
+  topContent: ReactNode;
+  bottomContent: ReactNode;
   title: string;
 }
-export default function PaperContainer({ top, down, title }: IProps) {
+
+export default function PaperContainer({
+  topContent,
+  bottomContent,
+  title,
+  ...boxProps
+}: IProps) {
   return (
     <Box
+      {...boxProps}
       sx={{
         display: 'flex',
         justifyContent: 'center',
@@ -37,10 +45,10 @@ export default function PaperContainer({ top, down, title }: IProps) {
           >
             {title}
           </Box>
-          {top}
+          {topContent}
         </Box>
 
-        {down}
+        {bottomContent}
       </Box>
     </Box>
   );

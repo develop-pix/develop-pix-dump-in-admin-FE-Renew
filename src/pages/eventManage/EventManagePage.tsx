@@ -30,7 +30,7 @@ export default function EventManagePage() {
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
         <PaperContainer
           title="이벤트 관리"
-          top={
+          topContent={
             <>
               <Box sx={{ display: 'flex' }}>
                 <FormControlLabel
@@ -88,7 +88,7 @@ export default function EventManagePage() {
               </Box>
             </>
           }
-          down={
+          bottomContent={
             <Box
               sx={{
                 width: 'auto',
