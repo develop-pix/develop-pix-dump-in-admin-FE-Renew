@@ -2,6 +2,7 @@
 import { useMutation } from '@tanstack/react-query';
 import { useMemo, useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useNavigate } from 'react-router-dom';
 import { getMultipleUserMutation } from '../../remote';
 import { useUpdateUserManage, userManageState } from '../../recoil';
 import {
@@ -16,6 +17,7 @@ import {
 } from '../../hooks';
 
 const useUserManage = () => {
+  const navigate = useNavigate();
   const [page, setPage] = useState(0);
   const setUserManageState = useSetRecoilState(userManageState);
   const userManage = useRecoilValue(userManageState);
@@ -94,6 +96,10 @@ const useUserManage = () => {
     setPage(newPage);
   };
 
+  const goToAlarmPage = () => {
+    navigate('/alarm');
+  };
+
   useMutateDataBasedOnPageValue<
     IMultipleUserManage,
     IMultipleUserManageResult[]
@@ -101,7 +107,7 @@ const useUserManage = () => {
 
   return {
     state: { page, tableHeaders, sliceTenPages, mergedData },
-    action: { handlePageChange, handleSearchInput },
+    action: { handlePageChange, handleSearchInput, goToAlarmPage },
   };
 };
 

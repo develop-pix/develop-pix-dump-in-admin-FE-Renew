@@ -25,6 +25,7 @@ export default function UserManagePage() {
         top={
           <>
             <Box
+              onClick={action.goToAlarmPage}
               sx={{
                 fontWeight: '600',
                 padding: '13px 10px 5px 10px',
