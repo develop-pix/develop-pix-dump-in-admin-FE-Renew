@@ -22,9 +22,10 @@ export default function UserManagePage() {
     <SidebarLayout>
       <PaperContainer
         title="사용자 관리"
-        top={
+        topContent={
           <>
             <Box
+              onClick={action.goToAlarmPage}
               sx={{
                 fontWeight: '600',
                 padding: '13px 10px 5px 10px',
@@ -65,7 +66,7 @@ export default function UserManagePage() {
             </Box>
           </>
         }
-        down={
+        bottomContent={
           <>
             <Box
               sx={{

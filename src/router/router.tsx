@@ -1,6 +1,7 @@
 /* eslint-disable import/no-cycle */
 import { createBrowserRouter } from 'react-router-dom';
 import {
+  AlarmPage,
   DashboardPage,
   EventEditPage,
   EventManagePage,
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
   {
     path: '/user',
     element: <UserManagePage />,
+  },
+  {
+    path: '/alarm',
+    element: <AlarmPage />,
   },
 ]);
 

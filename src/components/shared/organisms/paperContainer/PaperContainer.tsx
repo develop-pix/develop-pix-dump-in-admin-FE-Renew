@@ -1,47 +1,56 @@
-import { Box } from '@mui/material';
+/* eslint-disable react/jsx-props-no-spreading */
+import { Box, BoxProps, styled } from '@mui/material';
 import { ReactNode } from 'react';
 import { customColors } from '../../../../styles';
 
-interface IProps {
-  top: ReactNode;
-  down: ReactNode;
+interface IProps extends BoxProps {
+  topContent: ReactNode;
+  bottomContent: ReactNode;
   title: string;
 }
-export default function PaperContainer({ top, down, title }: IProps) {
-  return (
-    <Box
-      sx={{
-        display: 'flex',
-        justifyContent: 'center',
-        margin: '40px 0px 40px 0px',
-        minWidth: '90vw',
-      }}
-    >
-      <Box sx={{ width: '95%' }}>
-        <Box
-          sx={{
-            display: 'flex',
-            width: '100%',
-          }}
-        >
-          <Box
-            sx={{
-              fontWeight: '600',
-              borderColor: `${customColors?.color_border_gray}`,
-              borderBottom: 'none',
-              padding: '13px 10px 5px 10px',
-              borderRadius: '10px 10px 0 0',
-              backgroundColor: `${customColors?.sub_pink}`,
-              fontSize: '18px',
-            }}
-          >
-            {title}
-          </Box>
-          {top}
-        </Box>
 
-        {down}
-      </Box>
-    </Box>
+const PaperContainerBox = styled(Box)({
+  display: 'flex',
+  justifyContent: 'center',
+  margin: '40px 0px 40px 0px',
+  minWidth: '90vw',
+});
+
+const ContentWrapper = styled(Box)({
+  width: '95%',
+});
+
+const TopContentWrapper = styled(Box)({
+  display: 'flex',
+  width: '100%',
+});
+
+const TitleWrapper = styled(Box)({
+  fontWeight: '600',
+  borderColor: customColors?.color_border_gray,
+  borderBottom: 'none',
+  padding: '13px 10px 5px 10px',
+  borderRadius: '10px 10px 0 0',
+  backgroundColor: customColors?.sub_pink,
+  fontSize: '18px',
+});
+
+export default function PaperContainer({
+  topContent,
+  bottomContent,
+  title,
+  ...boxProps
+}: IProps) {
+  return (
+    <PaperContainerBox {...boxProps}>
+      <ContentWrapper>
+        <TopContentWrapper>
+          <TitleWrapper>{title}</TitleWrapper>
+          {topContent}
+        </TopContentWrapper>
+
+        {bottomContent}
+      </ContentWrapper>
+    </PaperContainerBox>
   );
 }
